@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">HorseGame</string>
+
+
+    <string name="title">Horse Challenge</string>
+    <string name="level">level</string>
+    <string name="moves">Moves</string>
+    <string name="time">Time</string>
+    <string name="lives">Lives</string>
+    <string name="options">Options</string>
+    <string name="instrucciones"> move horse over boar to complete all cells</string>
+    <string name="credits"> Game create by Jose Rivera</string>
+
+    <string name="premium"> Tap here to remove ads,get more levels and unlimited lives</string>
+    <string name="premiumTitle"> Get premiun Access for ever</string>
+    <string name="premiunBenefict1">No more Ads</string>
+    <string name="premiunBenefict2">Unlimited lives</string>
+    <string name="premiunBenefict3">Keep your rached level</string>
+    <string name="pay">PAY ONLY 1$ NOW</string>
+
+
+
+</resources>

@@ -328,21 +328,20 @@ class MainActivity : AppCompatActivity() {
     }
     private fun paintLevel_10(){
         paint_Row(5)
-        paint_Row(4)
+        paint_Column(4)
     }
     private fun paintLevel_11(){
         paint_Column(5)
-        paint_Column(4)
+        paint_Row(4)
     }
     private fun paintLevel_12(){
-        paintLevel_10(); paintLevel_11()
+        paint_Column(3)
+        paint_Row(3)
     }
     private fun paintLevel_13(){
-        for (i in 5..7){
-            for (j in 0..2){
-                painHorseCell(j, i, "previus_cell")
-            }
-        }
+        paint_Row(6)
+        paint_Row(2)
+        paint_Column(1)
     }
     private  fun growProgresBonus(){
 
@@ -552,7 +551,7 @@ class MainActivity : AppCompatActivity() {
                 resources.getIdentifier(color, "color", packageName)
             )
         )
-        iv.setImageResource(R.drawable.caballo)
+        iv.setImageResource(R.drawable.caballoneo)
     }
     private fun initScreenGame() {
         setSizeBoard()

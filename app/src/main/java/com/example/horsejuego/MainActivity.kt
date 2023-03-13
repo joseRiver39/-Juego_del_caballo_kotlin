@@ -157,8 +157,8 @@ class MainActivity : AppCompatActivity() {
 
             x = (0..7).random()
             y = (0..7).random()
-            if (boar[x][y] == 0) firstPosition = true
-                chechOption(x, y)
+            if (boar[x][y] == 0){ firstPosition = true
+                chechOption(x, y)}
             if (options == 0) firstPosition = false
         }
 
@@ -209,19 +209,19 @@ class MainActivity : AppCompatActivity() {
 
         var movesRequired = 0
         when (level) {
-            1 -> movesRequired = 8
-            2 -> movesRequired = 10
-            3 -> movesRequired = 12
-            4 -> movesRequired = 10
-            5 -> movesRequired = 10
-            6 -> movesRequired = 12
-            7 -> movesRequired = 5
-            8 -> movesRequired = 7
-            9 -> movesRequired = 9
-            10 -> movesRequired = 8
-            11 -> movesRequired = 10
-            12 -> movesRequired = 5
-            13 -> movesRequired = 5
+            1 -> movesRequired = 4
+            2 -> movesRequired = 4
+            3 -> movesRequired = 4
+            4 -> movesRequired = 5
+            5 -> movesRequired = 5
+            6 -> movesRequired = 5
+            7 -> movesRequired = 6
+            8 -> movesRequired = 6
+            9 -> movesRequired = 6
+            10 -> movesRequired = 7
+            11 -> movesRequired = 7
+            12 -> movesRequired = 7
+            13 -> movesRequired = 8
 
         }
 

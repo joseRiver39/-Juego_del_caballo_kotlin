@@ -209,18 +209,18 @@ class MainActivity : AppCompatActivity() {
 
         var movesRequired = 0
         when (level) {
-            1 -> movesRequired = 4
-            2 -> movesRequired = 4
-            3 -> movesRequired = 4
-            4 -> movesRequired = 5
-            5 -> movesRequired = 5
-            6 -> movesRequired = 5
-            7 -> movesRequired = 6
-            8 -> movesRequired = 6
-            9 -> movesRequired = 6
-            10 -> movesRequired = 7
-            11 -> movesRequired = 7
-            12 -> movesRequired = 7
+            1 -> movesRequired = 6
+            2 -> movesRequired = 6
+            3 -> movesRequired = 6
+            4 -> movesRequired = 6
+            5 -> movesRequired = 7
+            6 -> movesRequired = 7
+            7 -> movesRequired = 7
+            8 -> movesRequired = 7
+            9 -> movesRequired = 7
+            10 -> movesRequired = 8
+            11 -> movesRequired = 8
+            12 -> movesRequired = 8
             13 -> movesRequired = 8
 
         }

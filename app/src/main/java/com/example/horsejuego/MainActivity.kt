@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Point
 import android.icu.text.SimpleDateFormat
+import android.media.MediaPlayer
 import android.media.MediaScannerConnection
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -59,6 +60,11 @@ class MainActivity : AppCompatActivity() {
 
     private  var  checkMovement = true
 
+    private lateinit var bonus_tap : MediaPlayer
+    private lateinit var game_over : MediaPlayer
+    private lateinit var tap : MediaPlayer
+    private lateinit var win : MediaPlayer
+
     private var nameColorBlack = "black_cell"
     private var nameColorWhite = "white_cell"
 
@@ -68,8 +74,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initSound()
         initScreenGame()
         starGame()
+    }
+
+
+    private fun initSound(){
+
+        tap = MediaPlayer.create(this,R.raw.tapcaballo)
+        tap.isLooping = false
+
+        win = MediaPlayer.create(this,R.raw.ganar)
+        win.isLooping = false
+
+       game_over = MediaPlayer.create(this,R.raw.game_over)
+        game_over.isLooping = false
+
+        bonus_tap = MediaPlayer.create(this,R.raw.bonus)
+        bonus_tap.isLooping = false
     }
 
     fun chechChelClickend(v: View) {
@@ -171,10 +194,13 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun  setLevel(){
+
         if (nextLevel){
             level++
             lives++
-        }else{
+        }
+
+        else{
             lives--
             if (lives < 1){
                 level = 1
@@ -290,19 +316,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun paintLevel_4(){
-        for (i in 0..3){
-            for (j in 5..7){
-                boar[j][i] = 1
-                painHorseCell(j, i, "previus_cell")
-            }
-        }
+        paint_Column(2)
+        paint_Row(4)
     }
     private fun paintLevel_5(){
-        for (i in 0..3){
-            for (j in 0..3){
-                painHorseCell(j, i, "previus_cell")
-            }
-        }
+        paint_Row(6)
+        paint_Column(6)
     }
     private fun paintLevel_6(){
         paint_Column(4)
@@ -314,11 +333,8 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun paintLevel_8(){
-        for (i in 0..2){
-            for (j in 5..7){
-                painHorseCell(j, i, "previus_cell")
-            }
-        }
+      paint_Column(6)
+      paint_Column(2)
     }
     private fun paintLevel_9(){
         paint_Column(0)
@@ -369,7 +385,10 @@ class MainActivity : AppCompatActivity() {
             bonus++
             var tvBonusDta = findViewById<TextView>(R.id.tvBonusData)
             tvBonusDta.text = " + $bonus"
+            bonus_tap.start()
         }
+        else
+            tap.start()
 
 
 
@@ -402,7 +421,13 @@ class MainActivity : AppCompatActivity() {
                 paintAllOption()
             }
             else{
-                showMessage("Game Over", "Try again!",true )
+                if (level > 13) {
+
+                    showMessage("YOU WIN", "NEW GAME", true)
+                    lives = 0
+                }else{
+                    showMessage("Game Over", "Try again!", true)
+                }
 
             }
         }
@@ -430,13 +455,20 @@ class MainActivity : AppCompatActivity() {
         var score : String = ""
         if (gameOver){
 
+            game_over.start()
+
             score = "Score: " + (levelMoves -moves) + " / " + levelMoves
             string_share = " level not completed "+ score+" "
 
         }
+
+
         else{
-            score = tvTimeData.text.toString()
-            string_share = "New challenge completed. level: $level (" + score+")"
+
+                win.start()
+                score = tvTimeData.text.toString()
+                string_share = "New challenge completed. level: $level (" + score + ")"
+
 
         }
         var tvScoreMessage  = findViewById<TextView>(R.id.tvScoreMessage)
@@ -729,18 +761,27 @@ class MainActivity : AppCompatActivity() {
     private  fun starGame(){
 
         setLevel()
-        setLevelParameters()
 
+        if(level > 13){
+            win.start()
+            showMessage("Congratulations Win Game","New Game", gameOver = true)
+            level = 1
 
-        resetBoard()
-        clearBoar()
+        }else{
+            setLevelParameters()
 
-        setBoardLevel()
-        setFirstPossition()
+            resetBoard()
+            clearBoar()
 
-        resetTime()
-        starTime()
-        gaming = true
+            setBoardLevel()
+            setFirstPossition()
+
+            resetTime()
+            starTime()
+            gaming = true
+
+        }
+
     }
 
 }

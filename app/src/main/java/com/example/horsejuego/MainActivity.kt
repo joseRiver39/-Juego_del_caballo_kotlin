@@ -22,13 +22,11 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.test.runner.screenshot.ScreenCapture
-import androidx.test.runner.screenshot.Screenshot.capture
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 import java.util.concurrent.TimeUnit
-import java.util.logging.SimpleFormatter
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -95,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         bonus_tap.isLooping = false
     }
 
-    fun chechChelClickend(v: View) {
+    fun checkCellClicked(v: View) {
 
         var name = v.tag.toString()
         var x = name.subSequence(1, 2).toString().toInt()
@@ -409,7 +407,7 @@ class MainActivity : AppCompatActivity() {
             checkGameOver()
 
         }
-        else showMessage("You Win!!", "Nex Level",false )
+        else showMessage("You Win!!", "Next Level", false)
 
     }
     private fun checkGameOver(){
@@ -645,13 +643,15 @@ class MainActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),1)
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),1)
 
-        var ssc: ScreenCapture = capture(this)
-        bitmap = ssc.getBitmap()
+        // Capture screenshot using View.drawToBitmap
+        val rootView = window.decorView.rootView
+        rootView.isDrawingCacheEnabled = true
+        rootView.buildDrawingCache()
+        bitmap = Bitmap.createBitmap(rootView.drawingCache)
+        rootView.isDrawingCacheEnabled = false
 
         if (bitmap != null){
-             var idGame = SimpleDateFormat("yyyy/mm/dd").format(Date())
-            idGame = idGame.replace(":","")
-            idGame = idGame.replace("/","")
+             val idGame = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
 
             val path = saveImage(bitmap, "${idGame}.jpg")
             val bnpUri = Uri.parse(path)
